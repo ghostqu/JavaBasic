@@ -17,11 +17,15 @@ public class AddressBook implements Serializable, Cloneable{
 			   email.equals(a.email) &&
 			   pNumber.equals(a.pNumber);
 	}
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) {
 		AddressBook p = new AddressBook("Dong", "Ding", "whoCares@stevens.edu", "201-000-0000");
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("addrbook.ser"));
-		oos.writeObject(p);
-		oos.close();
+		try{
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("addrbook.ser"));
+			oos.writeObject(p);
+			oos.close();
+		} catch (IOException e) {
+			System.out.println("Can not write file!");
+		}
 		AddressBook p2 = p.clone();
 		System.out.println(p2.equals(p));
 	}
